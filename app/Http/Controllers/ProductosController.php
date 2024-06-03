@@ -10,7 +10,9 @@ class ProductosController extends Controller
         $productos = Producto::all();
         //return $productos;
         //para enviarlo a la vista
-         return view("Productos", compact("productos")); 
+         //return view("Productos", compact("productos"));
+         return response()->json($productos); 
+        
 
     }
 
@@ -29,7 +31,11 @@ class ProductosController extends Controller
 
         $producto->save();
 
-        return redirect('/Productos');
+        $productoJSON = json_encode($producto);
+
+    return $productoJSON;
+
+        //return redirect('/Productos');
 
     }
 
@@ -57,7 +63,11 @@ class ProductosController extends Controller
 
         $producto->save();
 
-        return redirect("/Productos/{$producto->producto_id}");
+        //return redirect("/Productos/{$producto->producto_id}");
+
+        $productoJSON = json_encode($producto);
+
+    return $productoJSON;
     }
 
     public function eliminar($producto_id){
