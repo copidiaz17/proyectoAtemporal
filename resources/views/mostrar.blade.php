@@ -12,11 +12,11 @@
   <h2>Descripcion del producto: {{$producto->producto_descripcion}}</h2>
   <h2>Precio: ${{$producto->producto_precio}}</h2>
 
-  <a href="/Productos/{{$producto->producto_id}}/Editar">Editar Producto</a>
+  <a href="/Productos/{{$producto->id}}/Editar">Editar Producto</a>
   <br>
   <br>
 
-  <form action="/Productos/{{$producto->producto_id}}" method="POST">
+  <form action="/Productos/{{$producto->id}}" method="POST">
 
   @csrf
   @method('DELETE')

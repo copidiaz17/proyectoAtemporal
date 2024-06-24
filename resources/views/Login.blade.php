@@ -6,6 +6,31 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Aqui va el login</h1>
+    <h1>Login</h1>
+
+    <form action="/Clientes/Login" method="POST">
+        @csrf   
+
+    <label for="">Email</label> 
+    <input type="text" name="cliente_email" id="">
+
+    <br><br>
+
+    <label for="">Contraseña</label> 
+    <input type="password" name="cliente_contraseña" id="">
+
+    <div>
+        <button type="submit">Login</button>
+    </div>
+
+
+
+
+
+
+
+    </form>
+
+    
 </body>
 </html>

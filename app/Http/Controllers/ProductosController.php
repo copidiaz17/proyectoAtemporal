@@ -47,9 +47,9 @@ class ProductosController extends Controller
     return $productoJSON;
     }
 
-    Public function editar($producto_id){
+    Public function editar($id){
 
-        $producto = Producto::findOrFail($producto_id);
+        $producto = Producto::findOrFail($id);
         return view("formEdicionProducto", compact('producto'));
     }
 
@@ -70,9 +70,9 @@ class ProductosController extends Controller
     return $productoJSON;
     }
 
-    public function eliminar($producto_id){
+    public function eliminar($id){
 
-        $producto = Producto::findOrFail($producto_id);
+        $producto = Producto::findOrFail($id);
         $producto->delete();
 
         return redirect("/Productos");

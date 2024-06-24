@@ -9,7 +9,7 @@
 
 <h1>Formulario para editar un producto</h1>
 
-<form action="/Productos/{{$producto->producto_id}}" method="POST">
+<form action="/Productos/{{$producto->id}}" method="POST">
 
     @csrf
     @method('PUT')

@@ -19,9 +19,11 @@ use App\Http\Controllers\ClientesController;
 Route::get('/', [PaginaPrincipalController::class, "index"]);
 
 Route::get('/Clientes', [ClientesController::class, "index"]);
-Route::post('/Clientes/Login', [ClientesController::class, "crear"]);
+Route::post('/Clientes/Crear', [ClientesController::class, "crear"]);
 
 Route::get('/Clientes/Login', [ClientesController::class, "ingresar"]);
+
+Route::post('/Clientes/Login', [ClientesController::class, "login"]);
 
 
 Route::get('/Productos', [ProductosController::class, "index"]);
