@@ -41,10 +41,10 @@ class ProductosController extends Controller
 
     Public function mostrar($producto){
         $producto = Producto::find($producto);
-        //return view("mostrar", compact("producto"));
-        $productoJSON = json_encode($producto);
+        return view("mostrar", compact("producto"));
+        //$productoJSON = json_encode($producto);
 
-    return $productoJSON;
+    //return $productoJSON;
     }
 
     Public function editar($id){

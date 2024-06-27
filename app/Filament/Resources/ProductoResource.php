@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms\Components\ImageInput;
 use App\Filament\Resources\ProductoResource\Pages;
 use App\Filament\Resources\ProductoResource\RelationManagers;
 use App\Models\Producto;
@@ -29,9 +30,12 @@ class ProductoResource extends Resource
                 Forms\Components\TextInput::make('producto_descripcion')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('producto_imagen')
+                Forms\Components\FileUpload::make('producto_imagen')
+                    ->label('Imagen del Producto')
                     ->required()
-                    ->maxLength(255),
+                    ->image()
+                    ->directory('images/productos')
+                    ->disk('public'),
                 Forms\Components\TextInput::make('producto_precio')
                     ->required()
                     ->numeric(),
@@ -49,8 +53,11 @@ class ProductoResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('producto_descripcion')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('producto_imagen')
-                    ->searchable(),
+                Tables\Columns\ImageColumn::make('producto_imagen')
+                    ->label('Imagen')
+                    ->circular(),
+                    //->disk('public')
+                    //->url(fn ($record) => $record->producto_imagen ? url('storage/images/productos/' . $record->producto_imagen) : url('images/productos/default-image.jpg')),
                 Tables\Columns\TextColumn::make('producto_precio')
                     ->numeric()
                     ->sortable(),

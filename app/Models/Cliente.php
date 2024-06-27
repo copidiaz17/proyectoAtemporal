@@ -23,6 +23,11 @@ class Cliente extends Authenticatable
         'remember_token',
     ];
 
+    public function getAuthPassword()
+    {
+        return $this->cliente_contraseña;
+    }
+
     
     public function getAuthIdentifierName()
     {
