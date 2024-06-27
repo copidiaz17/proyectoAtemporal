@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Producto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
@@ -10,8 +11,8 @@ class ProductosController extends Controller
         $productos = Producto::all();
         //return $productos;
         //para enviarlo a la vista
-         //return view("Productos", compact("productos"));
-         return response()->json($productos); 
+         return view("Productos", compact("productos"));
+         //return response()->json($productos); 
         
 
     }
@@ -69,6 +70,26 @@ class ProductosController extends Controller
 
     return $productoJSON;
     }
+
+    public function categoria()
+    {
+        // Obtener todas las categorías junto con el recuento de productos
+        $categorias = Categoria::withCount('productos')->get();
+
+        // Devolver la vista con las categorías
+        return view('categorias', compact('categorias'));
+    }
+
+    public function prod_categoria($categoria_id)
+    {
+        // Obtener la categoría específica junto con sus productos
+        $categoria = Categoria::findOrFail($categoria_id);
+        $productos = $categoria->productos;
+
+        // Devolver la vista con los productos de la categoría
+        return view('prodxCategoria', compact('categoria', 'productos'));
+    }
+
 
     public function eliminar($id){
 

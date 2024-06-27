@@ -13,6 +13,9 @@ class Producto extends Model
 
     public $incrementing = true; 
     protected $keyType = 'int'; 
+    public function categoria(){
+      return $this->belongsTo(Categoria::class, 'categoria_id');
+}
 
     protected $fillable = [
         'producto_nombre',
@@ -23,6 +26,8 @@ class Producto extends Model
 
        
     ];
+
+    
 
 
     

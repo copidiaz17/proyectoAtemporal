@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use PhpParser\Node\Stmt\Label;
 
 class ProductoResource extends Resource
 {
@@ -26,10 +27,13 @@ class ProductoResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('producto_nombre')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nombre'),
                 Forms\Components\TextInput::make('producto_descripcion')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Descripcion'),
+
                 Forms\Components\FileUpload::make('producto_imagen')
                     ->label('Imagen del Producto')
                     ->required()
@@ -38,10 +42,13 @@ class ProductoResource extends Resource
                     ->disk('public'),
                 Forms\Components\TextInput::make('producto_precio')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('categoria_id')
+                    ->numeric()
+                    ->label('Precio'),
+                    Forms\Components\Select::make('categoria_id')
+                    ->label('Categoría')
                     ->required()
-                    ->numeric(),
+                    ->relationship('categoria', 'categoria_nombre')
+                    ->searchable(),
             ]);
     }
 
@@ -50,9 +57,11 @@ class ProductoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('producto_nombre')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('producto_descripcion')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Nombre'),
+                //Tables\Columns\TextColumn::make('producto_descripcion')
+                  //  ->searchable()
+                    //->label('Descripcion'),
                 Tables\Columns\ImageColumn::make('producto_imagen')
                     ->label('Imagen')
                     ->circular(),
@@ -60,9 +69,10 @@ class ProductoResource extends Resource
                     //->url(fn ($record) => $record->producto_imagen ? url('storage/images/productos/' . $record->producto_imagen) : url('images/productos/default-image.jpg')),
                 Tables\Columns\TextColumn::make('producto_precio')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('categoria_id')
-                    ->numeric()
+                    ->sortable()
+                    ->label('Precio'),
+                    Tables\Columns\TextColumn::make('categoria.categoria_nombre')
+                    ->label('Categoría')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

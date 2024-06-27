@@ -34,7 +34,8 @@ class CategoriaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('categoria_nombre')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Nombre'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -28,6 +28,10 @@ Route::post('/Clientes/Login', [ClientesController::class, "login"]);
 
 Route::get('/Productos', [ProductosController::class, "index"]);
 
+Route::get('/Productos/Categorias', [ProductosController::class, 'categoria']);
+
+Route::get('/Productos/Categoria/{categoria}', [ProductosController::class, 'prod_categoria']);
+
 Route::get('/Productos/Crear', [ProductosController::class, "crear"]);
 Route::post('/Productos', [ProductosController::class, "store"]);
 
@@ -36,6 +40,8 @@ Route::get('/Productos/{producto}', [ProductosController::class, "mostrar"]);
 Route::get('/Productos/{producto}/Editar', [ProductosController::class, "editar"]);
 
 Route::put('/Productos/{producto}', [ProductosController::class, "actualizar"]);
+
+
 
 Route::delete('/Productos/{producto}', [ProductosController::class, "eliminar"]);
 
