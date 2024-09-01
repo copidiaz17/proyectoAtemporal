@@ -10,7 +10,7 @@
 
    
 
-    <form action="/Clientes/Login" method="POST">
+    <form action="/Clientes/Crear" method="POST">
 
     @csrf
     

@@ -4,14 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Cliente extends Model
+class Cliente extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
+
     protected $table = "cliente";
 
-    protected $primaryKey = 'cliente_id';
+    protected $fillable = [
+        'cliente_email',
+        'cliente_contraseña', 
+    ];
 
-    public $incrementing = true; 
-    protected $keyType = 'int'; 
+    protected $hidden = [
+        'cliente_contraseña',
+        'remember_token',
+    ];
+
+    public function getAuthPassword()
+    {
+        return $this->cliente_contraseña;
+    }
+
+    
+    public function getAuthIdentifierName()
+    {
+        return 'cliente_email';
+    }
 }

@@ -9,8 +9,26 @@ class Producto extends Model
 {
     use HasFactory;
     protected $table = "producto";
-    protected $primaryKey = 'producto_id';
+    protected $primaryKey = 'id';
 
     public $incrementing = true; 
     protected $keyType = 'int'; 
+    public function categoria(){
+      return $this->belongsTo(Categoria::class, 'categoria_id');
+}
+
+    protected $fillable = [
+        'producto_nombre',
+        'producto_descripcion',
+        'producto_imagen', 
+        'producto_precio',
+        'categoria_id',
+
+       
+    ];
+
+    
+
+
+    
 }

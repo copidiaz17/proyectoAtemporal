@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Producto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
@@ -10,8 +11,8 @@ class ProductosController extends Controller
         $productos = Producto::all();
         //return $productos;
         //para enviarlo a la vista
-         //return view("Productos", compact("productos"));
-         return response()->json($productos); 
+         return view("Productos", compact("productos"));
+         //return response()->json($productos); 
         
 
     }
@@ -41,15 +42,15 @@ class ProductosController extends Controller
 
     Public function mostrar($producto){
         $producto = Producto::find($producto);
-        //return view("mostrar", compact("producto"));
-        $productoJSON = json_encode($producto);
+        return view("mostrar", compact("producto"));
+        //$productoJSON = json_encode($producto);
 
-    return $productoJSON;
+    //return $productoJSON;
     }
 
-    Public function editar($producto_id){
+    Public function editar($id){
 
-        $producto = Producto::findOrFail($producto_id);
+        $producto = Producto::findOrFail($id);
         return view("formEdicionProducto", compact('producto'));
     }
 
@@ -70,9 +71,29 @@ class ProductosController extends Controller
     return $productoJSON;
     }
 
-    public function eliminar($producto_id){
+    public function categoria()
+    {
+        // Obtener todas las categorías junto con el recuento de productos
+        $categorias = Categoria::withCount('productos')->get();
 
-        $producto = Producto::findOrFail($producto_id);
+        // Devolver la vista con las categorías
+        return view('categorias', compact('categorias'));
+    }
+
+    public function prod_categoria($categoria_id)
+    {
+        // Obtener la categoría específica junto con sus productos
+        $categoria = Categoria::findOrFail($categoria_id);
+        $productos = $categoria->productos;
+
+        // Devolver la vista con los productos de la categoría
+        return view('prodxCategoria', compact('categoria', 'productos'));
+    }
+
+
+    public function eliminar($id){
+
+        $producto = Producto::findOrFail($id);
         $producto->delete();
 
         return redirect("/Productos");
